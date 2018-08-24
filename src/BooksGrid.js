@@ -12,22 +12,29 @@ class BooksGrid extends Component {
 					<div className="list-books-title">
 						<h1>MyReads</h1>
 					</div>
-					<div className="list-books-content">
-						<div>
-							<div className="bookshelf">
-								<h2 className="bookshelf-title">Currently Reading</h2>
-								<div className="bookshelf-books">
 
-									<BookDetails
-										books={this.props.books}
-										MoveShelfs={this.props.MoveShelfs}
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
+
+					<BookDetails
+						books={this.props.books.filter((book) => (book.shelf === 'currentlyReading'))}
+						title='Currently Reading'
+						MoveShelfs={this.props.MoveShelfs}
+					/>
+
+					<BookDetails
+						books={this.props.books.filter((book) => (book.shelf === 'wantToRead'))}
+						title='Want To Read'
+						MoveShelfs={this.props.MoveShelfs}
+					/>
+
+					<BookDetails
+						books={this.props.books.filter((book) => (book.shelf === 'read'))}
+						title='Read'
+						MoveShelfs={this.props.MoveShelfs}
+					/>
+
 				</div>
-			</div >
+			</div>
+
 		)
 	}
 }
