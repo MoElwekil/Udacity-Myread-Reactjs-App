@@ -27,13 +27,6 @@ class BooksApp extends React.Component {
 			this.setState({ books })
 		})
 	}
-	// update Shelf
-	MoveShelf = (book, shelf) => {
-		BooksAPI.update(book, shelf)
-		BooksAPI.getAll().then((book) => {
-			this.setState({ book })
-		})
-	}
 
 	//Update the Query
 	updateQuery = (query) => {
@@ -45,7 +38,7 @@ class BooksApp extends React.Component {
 			<div className="app">
 				<Route exact path="/" render={() => (
 					<div>
-						<BooksGrid books={this.state.books} MoveShelfs={this.MoveShelfs} />
+						<BooksGrid books={this.state.books} />
 						<div className="open-search">
 							<Link to='/search' onClick={() => this.setState({ screen: 'search' })}>Add a book</Link>
 						</div>

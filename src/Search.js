@@ -6,12 +6,26 @@ import { Link } from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
 // import SortBy
 import SortBy from 'sort-by'
+// import BooksAPI
+import * as BooksAPI from './BooksAPI'
 
 // Define Search
 class Search extends Component {
 	clearQuery = () => {
 		this.setState({ query: '' })
 	}
+
+	changeBookShelf = (bookId: string, e: any) => {
+		let books = this.props.books;
+		const book = books.filter(t => t.id === bookId)[0];
+		book.shelf = e.target.value;
+		BooksAPI.update(book, e.target.value).then(response => {
+			this.setState({
+				books
+			});
+		});
+	};
+
 	render() {
 		//change this.props.book to books only
 		const books = this.props.books
@@ -62,10 +76,7 @@ class Search extends Component {
 												`url('${book.imageLinks.thumbnail}')`
 										}}></div>
 										<div className="book-shelf-changer">
-											<select onChange={(event) => this.props.MoveShelfs(
-												this.props.book, event.target.value
-											)}
-												value={book.shelf}
+											<select value={book.shelf} onChange={e => this.changeBookShelf(book.id, e)}
 											>
 												<option value="move" disabled>Move to...</option>
 												<option value="currentlyReading">Currently Reading</option>
