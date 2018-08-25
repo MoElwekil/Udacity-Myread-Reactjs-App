@@ -12,13 +12,15 @@ class Search extends Component {
 	render() {
 		//change this.props.book to books only
 		const books = this.props.books
+		// change this.props.query to query only
+		const query = this.props.query
 		// Show Search Result
 		let showSearchResult
 		if (this.props.query) {
-			const match = new RegExp(escapeRegExp(this.props.query), 'i')
-			showSearchResult = this.props.books.filter((book) => match.test(book.title))
+			const match = new RegExp(escapeRegExp(query), 'i')
+			showSearchResult = books.filter((book) => match.test(book.title))
 		} else {
-			showSearchResult = this.props.books
+			showSearchResult = books
 		}
 
 		// Sort the Result by book Title
