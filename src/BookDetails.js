@@ -23,10 +23,7 @@ class BookDetails extends Component {
 															`url('${book.imageLinks.thumbnail}')`
 													}}></div>
 													<div className="book-shelf-changer">
-														<select onChange={(event) => this.props.MoveShelfs(
-															this.props.book, event.target.value
-														)}
-															value={book.shelf}
+														<select value={book.shelf} onChange={e => this.props.onChangeShelf(book.id, e)}
 														>
 															<option value="move" disabled>Move to...</option>
 															<option value="currentlyReading">Currently Reading</option>

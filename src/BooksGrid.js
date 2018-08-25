@@ -3,8 +3,20 @@ import React, { Component } from 'react'
 // import BookDetails
 import BookDetails from './BookDetails'
 
+import * as BooksAPI from './BooksAPI'
+
 // Define BooksGrid
 class BooksGrid extends Component {
+	changeBookShelf = (bookId: string, e: any) => {
+		let books = this.props.books;
+		const book = books.filter(t => t.id === bookId)[0];
+		book.shelf = e.target.value;
+		BooksAPI.update(book, e.target.value).then(response => {
+			this.setState({
+				books
+			});
+		});
+	};
 	render() {
 		return (
 			<div>
@@ -17,21 +29,20 @@ class BooksGrid extends Component {
 					<BookDetails
 						books={this.props.books.filter((book) => (book.shelf === 'currentlyReading'))}
 						title='Currently Reading'
-						MoveShelfs={this.props.MoveShelfs}
+						onChangeShelf={this.changeBookShelf}
 					/>
 
 					<BookDetails
 						books={this.props.books.filter((book) => (book.shelf === 'wantToRead'))}
 						title='Want To Read'
-						MoveShelfs={this.props.MoveShelfs}
+						onChangeShelf={this.changeBookShelf}
 					/>
 
 					<BookDetails
 						books={this.props.books.filter((book) => (book.shelf === 'read'))}
 						title='Read'
-						MoveShelfs={this.props.MoveShelfs}
+						onChangeShelf={this.changeBookShelf}
 					/>
-
 				</div>
 			</div>
 

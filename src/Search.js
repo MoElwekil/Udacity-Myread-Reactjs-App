@@ -9,6 +9,9 @@ import SortBy from 'sort-by'
 
 // Define Search
 class Search extends Component {
+	clearQuery = () => {
+		this.setState({ query: '' })
+	}
 	render() {
 		//change this.props.book to books only
 		const books = this.props.books
@@ -29,7 +32,7 @@ class Search extends Component {
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
-					<Link to='../' className="close-search" >Close</Link>
+					<Link to='../' onClick={() => this.props.updateQuery('')} className="close-search" >Close</Link>
 					<div className="search-books-input-wrapper">
 						{/*
 												NOTES: The search from BooksAPI is limited to a particular set of search terms.
