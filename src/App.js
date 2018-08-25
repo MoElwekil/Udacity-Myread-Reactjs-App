@@ -14,8 +14,11 @@ import { Route, Link } from 'react-router-dom'
 
 class BooksApp extends React.Component {
 	state = {
-		screen: 'app',
-		books: []
+		// Screen remove and now we use Route
+		//screen: 'app',
+		books: [],
+		query: ''
+
 	}
 
 	// Get all Books Data from the API
@@ -32,6 +35,11 @@ class BooksApp extends React.Component {
 		})
 	}
 
+	//Update the Query
+	updateQuery = (query) => {
+		this.setState({ query: query.trim() })
+	}
+
 	render() {
 		return (
 			<div className="app">
@@ -45,7 +53,11 @@ class BooksApp extends React.Component {
 				)} />
 
 				<Route path="/search" render={() => (
-					<Search />
+					<Search
+						query={this.state.query}
+						updateQuery={this.updateQuery}
+						books={this.state.books}
+					/>
 				)} />
 			</div>
 		)
